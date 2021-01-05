@@ -24,7 +24,7 @@ Person.prototype.getName = function () {
 };
 
 var suzi = new Person("Suzi");
-suzi.__prototype__.getName(); //undefined
+suzi.__proto__.getName(); //undefined
 
 Person.prototype === suzi.__proto__; //true
 ```
@@ -103,6 +103,9 @@ console.log(iu.getName()); // 바로 지금
 //프로토타입의 메서드에 접근 예
 console.log(iu.__proto__.getName.call(iu)); //지금
 ```
+### call()
+- call() 메소드는 주어진 this 값 및 각각 전달된 인수와 함께 함수를 호출
+- 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/call
 
 ## 4. 프로토타입 체인
 - 자바스크립트는 특정 객체의 프로퍼티나 메소드에 접근시 객체 자신의 것뿐 아니라 proto가 가리키는 링크를 따라서 자신의 부모 역할을 하는 프로토타입 객체의 프로퍼티나 메소드를 접근할 수 있다.
