@@ -76,5 +76,29 @@ var sub10 = sub(10);
 console.log(sub10(5));
 ```
 
+# 고차함수
+- 함수를 값으로 다루는 함수
+- 함수를 인자로 받아서 실행해주는 함수
+- 함수를 만들어서 리턴하는 함수
+- 이가 가능한 이유는 자바스크립트에서는 함수를 일급객체로 취급
+- 일급객체 : const addMaker = a => b => a + b;
+  const add10 = addMaker(10);
+  log(add10(5));
+  log(add10(10));
+
+```js
+const apply1 = f => f(1);
+  const add2 = a => a + 2;
+  log(apply1(add2));
+  log(apply1(a => a - 1));
+```
+
+```js
+const addMaker = a => b => a + b;
+  const add10 = addMaker(10);
+  log(add10(5));
+  log(add10(10));
+```
+
 # 출처
 - 인프런 함수형 프로그래밍 강의(유인동)
