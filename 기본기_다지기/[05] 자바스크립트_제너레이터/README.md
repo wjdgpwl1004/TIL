@@ -49,6 +49,43 @@ alert(JSON.stringify(three)); // {value: 3, done: true}
 ```
 - 끝까지 호출하면 실행은 return문에 다다르고 제너레이터 함수가 종료됨.
 
+# 코루틴
+
+## 서브루틴
+- 소프트웨어에서 특정 동작을 수행하는 일정 코드 부분을 의미                      
+
+## 코루틴
+- 루틴의 일종으로서, 협동 루틴이라 할 수 있다
+- 상호 연계 프로그램을 일컫는다고도 표현가능
+- 루틴과 서브 루틴은 서로 비대칭적인 관계이지만, 코루틴들은 완전히 대칭적인, 즉 서로가 서로를 호출하는 관계
+- 코루틴은 suspend/resume가 가능하며, 함수가 call/return되는 것과 비교하면 더 일반화된 형태라 할 수 있다.
+
+```js
+const getId = () =>
+  new Promise(resolve => {
+    setTimeout(() => resolve(1), 1)
+  })
+const getNameById = id =>
+  new Promise(resolve => {
+    setTimeout(() => resolve("chris"), 1)
+  })
+
+function* gen() {
+  const id = yield getId()
+  const name = yield getNameById(id)
+  console.log({ id, name })
+}
+
+const g = gen()
+g.next().value.then(id => {
+  g.next(id).value.then(name => {
+    g.next(name)
+  })
+})
+```
+- next(main) → promise(gen) → yield(gen) → then(main) →  // id 획득
+- next(main) → promise(gen) → yield(gen) → then(main) → // name 획득
+- 메인과 sub루틴 사이에서 제어권을 핑퐁하듯이 주고 받고 있는 모습이다. 이것을 코루틴(coroutine)이라고 부른다.
 
 # 출처
 - https://ko.javascript.info/generators
